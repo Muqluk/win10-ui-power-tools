@@ -1,7 +1,9 @@
 ﻿using System.Windows;
 
 using CommunityToolkit.Mvvm.DependencyInjection;
+
 using MC.UI.Core.MVVM;
+using MC.UI.WindowsPowerTools.Views.MainWindow;
 
 namespace MC.UI.WindowsPowerTools {
   public partial class App : Application {
@@ -10,7 +12,7 @@ namespace MC.UI.WindowsPowerTools {
 
       var services = new ServiceCollectionBuilder();
 
-      services.AddWindow<MainWindow>();
+      services.AddWindow<MainWindowView>();
       //services.ConfigureServices(services => {
       //  services.AddTransient<IInjectionService, InjectionService>();
       //});
@@ -18,7 +20,7 @@ namespace MC.UI.WindowsPowerTools {
       services.AddViewModels();
       services.Build();
 
-      Ioc.Default.GetService<MainWindow>()!.Show();
+      Ioc.Default.GetService<MainWindowView>()!.Show();
     }
   }
 }

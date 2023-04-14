@@ -47,7 +47,8 @@ namespace MC.UI.Core.MVVM {
     }
 
     public ServiceCollectionBuilder AddConfiguration(string fileName = "appsettings.json") {
-      if (File.Exists(fileName) == false) {
+
+      if (File.Exists($"{AppContext.BaseDirectory}/{fileName}") == false) {
         throw new FileNotFoundException($"Required file not found inMC.UI.Core.MVVM.ServiceCollectionBuilder.AddConfiguration", fileName);
       }
 
