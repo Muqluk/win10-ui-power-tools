@@ -3,12 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
+             xmlns:sys="clr-namespace:System;assembly=netstandard" 
              MinHeight="300" 
              MinWidth="500"
              mc:Ignorable="d" 
              d:DesignHeight="300" 
              d:DesignWidth="500">
-    <Grid Background="Gold">
-            
-    </Grid>
+  <!--
+    Attempting to bind directly to enum via using the following:
+  https://learn.microsoft.com/en-us/dotnet/desktop/wpf/data/how-to-bind-to-an-enumeration?view=netdesktop-7.0
+  -->
+  <UserControl.Resources>
+    <ObjectDataProvider x:Key="EnumDataSource"
+                        ObjectType="{x:Type sys:Enum}"
+                        MethodName="GetValues">
+      <!--<ObjectDataProvider.MethodParameters>
+        <x:Type TypeName="RegistryHive" />
+      </ObjectDataProvider.MethodParameters>-->
+    </ObjectDataProvider>
+  </UserControl.Resources>
+  <Grid Background="Gold">
+
+  </Grid>
 </UserControl>
