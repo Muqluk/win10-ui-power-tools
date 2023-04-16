@@ -1,10 +1,22 @@
-﻿using MC.UI.Core.MVVM;
+﻿using Microsoft.Win32;
+
+using MC.UI.Core.MVVM;
 
 namespace MC.UI.WindowsPowerTools.Views.RegReader {
   public class RegReaderViewModel : ViewModelBase {
-    public RegReaderViewModel(/*IInjectionService injectionService, IConfiguration configuration*/) {
-      //ExampleText = injectionService.InjectionServiceElement;
-      //ConfigurationText = configuration.GetValue<string>("example_appsettings_content_key");
+
+    private RegistryHive _selectedHive;
+    public RegistryHive SelectedHive {
+      get => _selectedHive;
+      set {
+        if (value != _selectedHive) {
+          _selectedHive = value;
+          OnPropertyChanged(nameof(SelectedHive));
+        }
+      }
     }
+
+    public RegReaderViewModel() { }
+
   }
 }
