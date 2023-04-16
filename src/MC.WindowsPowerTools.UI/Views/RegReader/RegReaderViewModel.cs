@@ -5,7 +5,7 @@ using MC.UI.Core.MVVM;
 namespace MC.UI.WindowsPowerTools.Views.RegReader {
   public class RegReaderViewModel : ViewModelBase {
 
-    private RegistryHive _selectedHive;
+    private RegistryHive _selectedHive = RegistryHive.CurrentUser;
     public RegistryHive SelectedHive {
       get => _selectedHive;
       set {

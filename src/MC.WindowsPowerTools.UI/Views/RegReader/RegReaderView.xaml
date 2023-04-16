@@ -7,28 +7,63 @@
   xmlns:sys="clr-namespace:System;assembly=mscorlib"
   xmlns:win32="clr-namespace:Microsoft.Win32;assembly=mscorlib"
   xmlns:vm="clr-namespace:MC.UI.WindowsPowerTools.Views.RegReader"
-  mc:Ignorable="d"  d:DesignHeight="300" d:DesignWidth="500">
+  Background="Gold"
+  mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="500">
+
   <UserControl.DataContext>
     <vm:RegReaderViewModel />
   </UserControl.DataContext>
   <UserControl.Resources>
-    <!--
-      Attempting to bind directly to enum via using the following:
-      https://learn.microsoft.com/en-us/dotnet/desktop/wpf/data/how-to-bind-to-an-enumeration?view=netdesktop-7.0
-  
-      the above link got me close.  The link below pulled me over the line:
-      https://textbooks.cs.ksu.edu/cis400/2-desktop-development/04-data-binding/05-binding-enums/embed.html
-    -->
     <ObjectDataProvider x:Key="registryHive" ObjectType="{x:Type sys:Enum}" MethodName="GetValues">
       <ObjectDataProvider.MethodParameters>
         <x:Type TypeName="win32:RegistryHive"/>
       </ObjectDataProvider.MethodParameters>
     </ObjectDataProvider>
-    
-  </UserControl.Resources>
 
-  <StackPanel>
-    <TextBox Text="{Binding SelectedHive}" />
-    <ListBox ItemsSource="{Binding Source={StaticResource registryHive}}" SelectedItem="{Binding Path=SelectedHive}" />
-  </StackPanel>
+  </UserControl.Resources>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="auto" />
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="auto" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+    <StackPanel 
+      Grid.Row="0" 
+      Grid.ColumnSpan="2"
+      Orientation="Horizontal"
+      HorizontalAlignment="Stretch"
+      Background="AliceBlue"
+    >
+      <Label Content="Current Hive:" Margin="5 0 5 0" Padding="0" VerticalAlignment="Center"/>
+      <ComboBox Margin="0 2" Padding="5 0" BorderBrush="Transparent"
+        ItemsSource="{Binding Source={StaticResource registryHive}}" 
+        SelectedItem="{Binding Path=SelectedHive}" 
+      />
+    </StackPanel>
+    <StackPanel Grid.Row="1">
+      <ListBox 
+        ItemsSource="{Binding Source={StaticResource registryHive}}" 
+        SelectedItem="{Binding Path=SelectedHive}"
+      />
+    </StackPanel>
+    <StatusBar Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom">
+      <StatusBar.Background>
+        <SolidColorBrush Color="AliceBlue"></SolidColorBrush>
+      </StatusBar.Background>
+      <StatusBarItem>
+        <Label FontSize="8" Content="Eventual Status Bar..." Margin="0" Padding="0" VerticalAlignment="Center"/>
+      </StatusBarItem>
+      <StatusBarItem>
+        <Label FontSize="8" Content="IsDirty" Margin="0" Padding="0" VerticalAlignment="Center"/>
+      </StatusBarItem>
+      <StatusBarItem>
+        <Label FontSize="8" Content="Number of Changes: 18" Margin="0" Padding="0" VerticalAlignment="Center"/>
+      </StatusBarItem>
+    </StatusBar>
+  </Grid>
+
 </UserControl>
