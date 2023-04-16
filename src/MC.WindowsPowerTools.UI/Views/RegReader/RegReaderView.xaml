@@ -6,8 +6,11 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
   xmlns:sys="clr-namespace:System;assembly=mscorlib"
   xmlns:win32="clr-namespace:Microsoft.Win32;assembly=mscorlib"
+  xmlns:vm="clr-namespace:MC.UI.WindowsPowerTools.Views.RegReader"
   mc:Ignorable="d"  d:DesignHeight="300" d:DesignWidth="500">
-
+  <UserControl.DataContext>
+    <vm:RegReaderViewModel />
+  </UserControl.DataContext>
   <UserControl.Resources>
     <!--
       Attempting to bind directly to enum via using the following:
@@ -21,6 +24,7 @@
         <x:Type TypeName="win32:RegistryHive"/>
       </ObjectDataProvider.MethodParameters>
     </ObjectDataProvider>
+    
   </UserControl.Resources>
 
   <StackPanel>
