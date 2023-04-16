@@ -1,15 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
-namespace MC.WindowsPowerTools.UI {
-  /// <summary>
-  /// Interaction logic for App.xaml
-  /// </summary>
+using CommunityToolkit.Mvvm.DependencyInjection;
+
+using MC.UI.Core.MVVM;
+using MC.UI.WindowsPowerTools.Views.MainWindow;
+
+namespace MC.UI.WindowsPowerTools {
   public partial class App : Application {
+    protected override void OnStartup(StartupEventArgs args) {
+      base.OnStartup(args);
+
+      var services = new ServiceCollectionBuilder();
+
+      services.AddWindow<MainWindowView>();
+      //services.ConfigureServices(services => {
+      //  services.AddTransient<IInjectionService, InjectionService>();
+      //});
+      services.AddConfiguration();
+      services.AddViewModels();
+      services.Build();
+
+      Ioc.Default.GetService<MainWindowView>()!.Show();
+    }
   }
 }

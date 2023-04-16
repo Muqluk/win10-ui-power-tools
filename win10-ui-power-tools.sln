@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MC.WindowsPowerTools.UI", "src\MC.WindowsPowerTools.UI\MC.WindowsPowerTools.UI.csproj", "{19ABC52B-FE8B-4F9E-BF6F-BF230FC85454}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MC.UI.WindowsPowerTools", "src\MC.WindowsPowerTools.UI\MC.UI.WindowsPowerTools.csproj", "{19ABC52B-FE8B-4F9E-BF6F-BF230FC85454}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A5128F23-3568-47BB-BE21-5C8564D7415D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".solution items", ".solution items", "{A5128F23-3568-47BB-BE21-5C8564D7415D}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		readme.md = readme.md
@@ -17,6 +17,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{0FF3
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{34EF1CF6-5C35-488E-A112-FB7D10D78695}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MC.UI.Core.MVVM", "src\MC.UI.Core\MC.UI.Core.MVVM\MC.UI.Core.MVVM.csproj", "{F96E4427-1F14-4523-81AD-B04C1AE9CE5C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MC.UI.Core.MVVM.Tests", "src\MC.UI.Core\MC.UI.Core.MVVM.Tests\MC.UI.Core.MVVM.Tests.csproj", "{5426505C-EDB6-4979-AB02-24A9F27E17A3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MC.UI.Core", "MC.UI.Core", "{BF13B551-C49C-4C17-A9B6-F8B9A8FBD7BB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MVVM", "MVVM", "{0CB5D62D-D398-4E3B-BB49-5EDDBF3238FF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,9 +37,24 @@ Global
 		{19ABC52B-FE8B-4F9E-BF6F-BF230FC85454}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19ABC52B-FE8B-4F9E-BF6F-BF230FC85454}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19ABC52B-FE8B-4F9E-BF6F-BF230FC85454}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F96E4427-1F14-4523-81AD-B04C1AE9CE5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F96E4427-1F14-4523-81AD-B04C1AE9CE5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F96E4427-1F14-4523-81AD-B04C1AE9CE5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F96E4427-1F14-4523-81AD-B04C1AE9CE5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5426505C-EDB6-4979-AB02-24A9F27E17A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5426505C-EDB6-4979-AB02-24A9F27E17A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5426505C-EDB6-4979-AB02-24A9F27E17A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5426505C-EDB6-4979-AB02-24A9F27E17A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{19ABC52B-FE8B-4F9E-BF6F-BF230FC85454} = {34EF1CF6-5C35-488E-A112-FB7D10D78695}
+		{F96E4427-1F14-4523-81AD-B04C1AE9CE5C} = {0CB5D62D-D398-4E3B-BB49-5EDDBF3238FF}
+		{5426505C-EDB6-4979-AB02-24A9F27E17A3} = {0CB5D62D-D398-4E3B-BB49-5EDDBF3238FF}
+		{BF13B551-C49C-4C17-A9B6-F8B9A8FBD7BB} = {34EF1CF6-5C35-488E-A112-FB7D10D78695}
+		{0CB5D62D-D398-4E3B-BB49-5EDDBF3238FF} = {BF13B551-C49C-4C17-A9B6-F8B9A8FBD7BB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A9536D00-F553-47DF-99D9-CC0ECEC0CE05}
