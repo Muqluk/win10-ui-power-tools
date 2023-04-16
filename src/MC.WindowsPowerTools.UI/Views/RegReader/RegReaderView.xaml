@@ -45,10 +45,8 @@
       />
     </StackPanel>
     <StackPanel Grid.Row="1">
-      <ListBox 
-        ItemsSource="{Binding Source={StaticResource registryHive}}" 
-        SelectedItem="{Binding Path=SelectedHive}"
-      />
+      <ListBox ItemsSource="{Binding SubKeys}" DisplayMemberPath="DisplayName">
+      </ListBox>
     </StackPanel>
     <StatusBar Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom">
       <StatusBar.Background>
