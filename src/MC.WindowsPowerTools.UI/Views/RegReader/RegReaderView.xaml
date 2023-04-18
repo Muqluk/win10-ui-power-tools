@@ -7,52 +7,112 @@
   xmlns:sys="clr-namespace:System;assembly=mscorlib"
   xmlns:win32="clr-namespace:Microsoft.Win32;assembly=mscorlib"
   xmlns:vm="clr-namespace:MC.UI.WindowsPowerTools.Views.RegReader"
-  Background="Gold"
-  mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="500">
+  MinWidth="350"
+  mc:Ignorable="d"
+  d:Background="Gold"
+>
 
   <UserControl.DataContext>
     <vm:RegReaderViewModel />
   </UserControl.DataContext>
+
   <UserControl.Resources>
     <ObjectDataProvider x:Key="registryHive" ObjectType="{x:Type sys:Enum}" MethodName="GetValues">
       <ObjectDataProvider.MethodParameters>
         <x:Type TypeName="win32:RegistryHive"/>
       </ObjectDataProvider.MethodParameters>
     </ObjectDataProvider>
-
   </UserControl.Resources>
+
   <Grid>
+
     <Grid.RowDefinitions>
       <RowDefinition Height="auto" />
       <RowDefinition Height="*" />
       <RowDefinition Height="auto" />
     </Grid.RowDefinitions>
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="auto" />
-      <ColumnDefinition Width="*" />
-    </Grid.ColumnDefinitions>
-    <StackPanel 
-      Grid.Row="0" 
-      Grid.ColumnSpan="2"
+
+    <StackPanel
+      Grid.Row="0"
       Orientation="Horizontal"
       HorizontalAlignment="Stretch"
       Background="AliceBlue"
     >
-      <Label Content="Current Hive:" Margin="5 0 5 0" Padding="0" VerticalAlignment="Center"/>
-      <ComboBox Margin="0 2" Padding="5 0" BorderBrush="Transparent"
-        ItemsSource="{Binding Source={StaticResource registryHive}}" 
-        SelectedItem="{Binding Path=SelectedHive}" 
+      <Label
+        Content="Current Hive:"
+        Margin="5 0 5 0"
+        Padding="0"
+        VerticalAlignment="Center"
+      />
+      <ComboBox
+        Margin="0 2"
+        Padding="5 0"
+        BorderBrush="Transparent"
       />
     </StackPanel>
-    <StackPanel Grid.Row="1">
-      <ListBox ItemsSource="{Binding SubKeys}" DisplayMemberPath="DisplayName">
-      </ListBox>
-    </StackPanel>
+
+    <Grid
+      x:Name="RegExplorerContent"
+      Grid.Row="1"
+      Grid.Column="0"
+      Grid.ColumnSpan="2"
+      HorizontalAlignment="Stretch"
+    >
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="auto" />
+        <ColumnDefinition Width="auto" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="auto" />
+        <RowDefinition Height="*" />
+      </Grid.RowDefinitions>
+
+      <ComboBox
+        Grid.Column="0"
+        Grid.Row="0"
+        Margin="0"
+        Padding="5 0"
+        BorderBrush="Transparent"
+        ItemsSource="{Binding Source={StaticResource registryHive}}" 
+        SelectedItem="{Binding Path=SelectedHive}"
+      />
+      <ListBox
+        Grid.Column="0"
+        Grid.Row="1"
+        MaxHeight="{Binding ElementName=RegExplorerContent, Path=ActualHeight}"
+        VerticalAlignment="Stretch"
+        MinWidth="100"
+        MinHeight="200"
+        Height="auto"
+        Background="AliceBlue"
+        ItemsSource="{Binding SubKeys}"
+        ScrollViewer.CanContentScroll="True"
+      />
+      <Separator
+        Grid.Column="1"
+        Grid.RowSpan="2"
+        Width="5"
+        Background="Silver"
+      />
+      <ListBox
+        Grid.Column="2"
+        Grid.RowSpan="2"
+        Height="{Binding ElementName=RegExplorerContent, Path=ActualHeight}"
+        VerticalAlignment="Stretch"
+        MinWidth="100"
+        MinHeight="200"
+        Width="auto"
+        Background="AliceBlue"
+        ItemsSource="{Binding SubKeys}"
+        ScrollViewer.CanContentScroll="True"
+      />
+    </Grid>
     <StatusBar Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom">
       <StatusBar.Background>
         <SolidColorBrush Color="AliceBlue"></SolidColorBrush>
       </StatusBar.Background>
-      <StatusBarItem>
+      <!--<StatusBarItem>
         <Label FontSize="8" Content="Eventual Status Bar..." Margin="0" Padding="0" VerticalAlignment="Center"/>
       </StatusBarItem>
       <StatusBarItem>
@@ -60,6 +120,12 @@
       </StatusBarItem>
       <StatusBarItem>
         <Label FontSize="8" Content="Number of Changes: 18" Margin="0" Padding="0" VerticalAlignment="Center"/>
+      </StatusBarItem>-->
+      <StatusBarItem>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+          <!--<Label FontSize="11" Content="Last Error: " Margin="0 0 8 0" Padding="0" VerticalAlignment="Center"/>-->
+          <TextBlock Background="Red" Width="auto" FontSize="11" Text="{Binding LatestErrorMsg}" Margin="0" Padding="0" VerticalAlignment="Center"/>
+        </StackPanel>
       </StatusBarItem>
     </StatusBar>
   </Grid>
