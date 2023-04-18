@@ -1,14 +1,24 @@
-﻿using System.Security;
+﻿#region usings
+
+using System.Security;
 
 using Microsoft.Win32;
 
 using MC.UI.Core.MVVM;
 
+#endregion
+
 namespace MC.UI.WindowsPowerTools.Views.RegReader {
   public partial class RegReaderViewModel : ViewModelBase {
+
+    #region Local Constants
+
     const bool OPEN_AS_WRITABLE = true;
     const bool OPEN_AS_READ_ONLY = false;
 
+    #endregion
+
+    #region Properties
 
     [ObservableProperty]
     bool _hasError = false;
@@ -22,8 +32,18 @@ namespace MC.UI.WindowsPowerTools.Views.RegReader {
 
     [ObservableProperty]
     ObservableCollection<RegistryKey> _subKeys = new();
-    partial void OnSelectedHiveChanging(RegistryHive value) => System.Diagnostics.Debug.WriteLine($"OnSelectedHiveChanging: {SelectedHive.ToString()}");
-    partial void OnSelectedHiveChanged(RegistryHive value) {
+
+    #endregion
+
+    #region Event Handlers
+
+    partial void OnSelectedHiveChanged(RegistryHive value) => OpenSelectedHive();
+
+    #endregion
+
+    #region Methods
+
+    private void OpenSelectedHive() {
       SubKeys.Clear();
 
       using RegistryKey key = RegistryKey.OpenBaseKey(SelectedHive, RegistryView.Registry32);
@@ -39,11 +59,6 @@ namespace MC.UI.WindowsPowerTools.Views.RegReader {
       }
     }
 
-
-
-    public RegReaderViewModel() {
-    }
-
     private void LogError(Exception e, string key) {
       LatestErrorMsg = $"{e.GetType().FullName} - {e.Message}";
 
@@ -55,5 +70,8 @@ namespace MC.UI.WindowsPowerTools.Views.RegReader {
       // Actually pipe to logging solution.
 #endif
     }
+
+    #endregion
+
   }
 }
